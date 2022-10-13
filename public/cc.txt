@@ -1,0 +1,88 @@
+Persona 1: 
+Demographic: 
+	Name: Aastha Mehra
+	Age: 26
+	gender: Female
+	Profession: Freelancer
+	Income: 70000-75000
+	
+Behaviour: 
+brands: Pepe Jeans,  Zara, H&M, Levis
+Preference: Instagram, Snap Chat, Email 
+Interests: 
+Reading
+Travelling
+Geographic:
+	Delhi
+
+Scenarios:
+
+Saw the advertisement of our website in Instagram, got attracted and visit the site.
+	    When Aastha tried to explore the options of jacket ,the pop up message arrived after every 10-          15 seconds to login, so she got frustrated and leave the site.
+	Solution: 
+	        Show the login/signup only when the user is going to pay the amount of purchased product.
+
+Aastha visit the site first time, and find out such lovely and affordable jackets so she purchased them and when she is going to signup , the Signup form was bit lengthy and she felt bored and irritated to complete the form so she left the site.
+	  Solution:
+	        Have Precise and relevant information in the signup Form.
+
+Aastha purchased a Jacket from the website but due to size issue she wants to exchange the product but exchange option wasn't available.
+	  Solution:
+	         User should have both option exchange the Product/return the Product.
+
+Aastha visited the website and wants to purchased a Jacket, She wants to share the link to her Sister but unable to find out the Share button. 
+	    Solution:
+	            Website have a share button on the top of a Single Page or should be left side of cart button so that or can have a contrast and be encapsulated so that button can be focused by user.
+
+Aastha wants to purchased a jacket but got confused because of the size issues and because she got so confused she decided to not buy a jacket.
+	    Solution: 
+	            Website should have a Size Finder.
+	      
+	........................................................................................................................................................
+
+Persona 2:
+
+Demographic:
+Name: Shyam Bhonsle
+Age: 35
+Gender: Male
+Profession: Business Man
+Income: 1,00,000 - 1,20,000
+Behaviour:
+Brands: Vimal, Raymonds, SiyaRam
+Preference: Whats App, Facebook, Email
+Interests: 
+Chess
+Leather work
+
+Geographic:
+	Rural Area
+
+Scenarios:
+
+Shyam has a knowledge of leather, so when he visit the website he wants to know the Product Details, But he Couldn't able to Find out the details related to Product and was unable to have a faith in a Product and in a website.
+	  Solution:
+	        Always show the Product Details and Material Details of the Product.
+
+Shyam visited the website and encountered the complex English Terms.
+	   Solution:
+	        Website Use Layman English terms and can also have a option to change the mode of language.
+
+Shyam ordered 3 Jackets but due to some reason the product's delivery got extend and he want to know that when his order would arrive. But unable to find out
+	    Solution:
+	          Website should have a track details of the Ordered Product.
+
+Shyam wants to order a Jacket and wants to know about the Product Quality,  the colour of the Product and the Picture which is shown is same or not.
+	    Solution: 
+	         Provide the Ratings & Review Option so That the User can Compare the Product.
+
+Shyam wants to order a Jacket from the Website but have a Question related to that Product and was unable to find out the answer so decided to not purchased the Product.
+	    Solution:
+	          Website should have a Questionnaire option.
+
+
+	
+
+	 
+	
+

@@ -8,25 +8,94 @@ import {
   Select,
   Spinner,
   Heading,
+  TextField,
+  Frame,
+  Loading,
 } from "@shopify/polaris";
+// import { Loading } from "@shopify/polaris/build/ts/latest/src/components/Frame/components";
 const Home = () => {
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState("5");
   const [pagination, setPagination] = useState(1);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState();
-  const [selectEquals,setSelectEquals] = useState("Equals")
+
+  const [filterEquals, setFilterEquals] = useState([
+    { type: "user_id", val: "-1", text: "" },
+    { type: "catalog", val: "-1", text: "" },
+    { type: "username", val: "-1", text: "" },
+    { type: "shops.email", val: "-1", text: "" },
+    { type: "shopify_plan", val: "-1", text: "" },
+    { type: "updated_at", val: "-1", text: "" },
+    { type: "created_at", val: "-1", text: "" },
+    { type: "shop_url", val: "-1", text: "" },
+  ]);
+  console.log(filterEquals);
+  const options = [
+    { label: "Equals", value: "1" },
+    { label: "Not Equals", value: "2" },
+    { label: "Contains", value: "3" },
+    { label: "Does Not Contains", value: "4" },
+    { label: "Starts With", value: "5" },
+    { label: "Ends With", value: "6" },
+  ];
+  var sel = Array(filterEquals.length)
+    .fill(0)
+    .map((item, idx) => {
+      return (
+        <>
+          <Select
+            placeholder="--select--"
+            options={options}
+            onChange={(value) => {
+              // debugger;
+              var temp = filterEquals;
+              temp[idx].val = value;
+              setFilterEquals([...temp]);
+            }}
+            value={filterEquals[idx].val}
+          />
+          <br />
+          <TextField
+            value={filterEquals[idx].text}
+            onChange={(value) => {
+              var temp = filterEquals;
+              temp[idx].text = value;
+              setFilterEquals([...temp]);
+            }}
+          />
+        </>
+      );
+    });
+
+  // SELECT ROWS PER PAGE
+  console.log(filterEquals[0]);
+  // USE EFFECT HOOK
   useEffect(() => {
+    var str = "";
+    filterEquals.map((item, index) => {
+      if (item.text !== "") {
+        str += `&filter[${item.type}][${item.val}] = ${item.text}`;
+      }
+    });
+
+    if (window.controller) {
+      window.controller.abort();
+    }
+
+    window.controller = new AbortController();
+    var signal = window.controller.signal;
+
     const requestOptions = {
       headers: {
-        // "Content-Type": "application/json",
-        // Accept: "application/json",
         authorization: localStorage.getItem("token"),
       },
+      signal: signal,
     };
+
     setLoading(true);
     fetch(
-      `https://fbapi.sellernext.com/frontend/admin/getAllUsers?activePage=${pagination}&count=${selected}`,
+      `https://fbapi.sellernext.com/frontend/admin/getAllUsers?activePage=${pagination}&count=${selected}+${str}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -35,7 +104,6 @@ const Home = () => {
         setCount(actualData.data.count);
         console.log(actualData);
         let tempArr = [];
-
         actualData.data.rows.forEach((item) => {
           tempArr.push([
             item.user_id,
@@ -48,26 +116,16 @@ const Home = () => {
             item.shop_url,
           ]);
         });
-        let selectArr = [];
-        for (let i = 0; i < 8; i++) {
-          selectArr.push(
-            <Select
-              options={options}
-              onChange={handleSelectEqualsChange}
-              value={selectEquals}
-            />
-          );
-        }
-        tempArr.unshift(selectArr);
+
         setData(tempArr);
       })
       .catch((error) => {
-        alert(error);
+        console.log(error);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [selected, pagination]);
+  }, [selected, pagination, filterEquals]);
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
   const optionsPerRow = [
@@ -77,15 +135,13 @@ const Home = () => {
     { label: "20", value: "20" },
   ];
 
-  const handleSelectEqualsChange = useCallback((values) => setSelectEquals(values), [])
-  const options = [
-    { label: "Equals", values: "Equals" },
-    { label: "Not Equals", values: "Not Equals" },
-   
-  ];
-
   return (
     <div className="homePage">
+      {loading ? (
+        <Frame>
+          <Loading />
+        </Frame>
+      ) : null}
       <div className="homeHead">
         <Text variant="heading2xl" as="h3">
           Home Page
@@ -125,7 +181,7 @@ const Home = () => {
         </Card>
       </div>
 
-      {loading ? (
+      {false ? (
         <div className="spinner">
           <Spinner accessibilityLabel="Spinner example" size="large" />
         </div>
@@ -152,7 +208,7 @@ const Home = () => {
                 "Created At",
                 "Shops myShopify Domain",
               ]}
-              rows={data}
+              rows={[sel, ...data]}
             />
           </Card>
         </div>
